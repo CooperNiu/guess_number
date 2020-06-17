@@ -112,4 +112,21 @@ public class GameControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.score").value("25"));
     }
 
+    @Test
+    public void should_return_score_f18_given_6_guess_fail() throws Exception {
+        String[] result = new String[6];
+        result[0] = guessNumberGame.guess(Arrays.asList("9", "2", "3", "4"));
+        result[1] = guessNumberGame.guess(Arrays.asList("9", "2", "3", "4"));
+        result[2] = guessNumberGame.guess(Arrays.asList("9", "2", "3", "4"));
+        result[3] = guessNumberGame.guess(Arrays.asList("9", "2", "3", "4"));
+        result[4] = guessNumberGame.guess(Arrays.asList("9", "2", "3", "4"));
+        result[5] = guessNumberGame.guess(Arrays.asList("9", "2", "3", "4"));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/trySeveralTimesScore/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("result", result))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.score").value("-18"));
+    }
+
 }
