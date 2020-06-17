@@ -64,18 +64,34 @@ public class GameControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.score").value("-3"));
     }
 
+//    @Test
+//    public void should_return_score_11_given_3_guess_success() throws Exception {
+//        String[] result = new String[3];
+//        result[0] = guessNumberGame.guess(Arrays.asList("1", "2", "3", "4"));
+//        result[1] = guessNumberGame.guess(Arrays.asList("1", "2", "3", "4"));
+//        result[2] = guessNumberGame.guess(Arrays.asList("1", "2", "3", "4"));
+//
+//        mockMvc.perform(MockMvcRequestBuilders.get("/trySeveralTimesScore/")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .param("result", result))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.score").value("11"));
+//    }
+
     @Test
-    public void should_return_score_11_given_3_guess_success() throws Exception {
-        String[] result = new String[3];
+    public void should_return_score_20_given_5_guess_success() throws Exception {
+        String[] result = new String[5];
         result[0] = guessNumberGame.guess(Arrays.asList("1", "2", "3", "4"));
         result[1] = guessNumberGame.guess(Arrays.asList("1", "2", "3", "4"));
         result[2] = guessNumberGame.guess(Arrays.asList("1", "2", "3", "4"));
+        result[3] = guessNumberGame.guess(Arrays.asList("1", "2", "3", "4"));
+        result[4] = guessNumberGame.guess(Arrays.asList("1", "2", "3", "4"));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/trySeveralTimesScore/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("result", result))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.score").value("11"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.score").value("20"));
     }
 
 }

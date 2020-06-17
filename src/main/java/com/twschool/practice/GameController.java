@@ -43,7 +43,7 @@ public class GameController {
         Map<String, String> map = new HashMap<>();
 
         for (int i = 0; i < result.length; i++) {
-            if (result[i].equals("4A0B") && (guessRight == 0 || guessRight == 1)) {
+            if (result[i].equals("4A0B") && (guessRight == 0 || guessRight == 1 || guessRight == 3)) {
                 guessRight++;
                 score += 3;
             } else if (result[i].equals("4A0B") && guessRight == 4) {
