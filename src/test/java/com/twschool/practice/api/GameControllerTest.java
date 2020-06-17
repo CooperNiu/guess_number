@@ -27,4 +27,15 @@ public class GameControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.input").value("1 2 3 4"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result").value("4A0B"));
     }
+
+    @Test
+    public void should_return_score_f3_given_one_guess() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/score/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("guess", "1 2 3 4"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.score").value("-3"));
+    }
+
+
 }
