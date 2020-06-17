@@ -35,10 +35,14 @@ public class GuessNumberGame {
     }
 
     private void decreaseTryTimes() {
-        leftTryTimes --;
+        leftTryTimes--;
     }
 
     public GameStatus getStatus() {
         return status;
+    }
+
+    public int getLeftTryTimes() {
+        return this.leftTryTimes;
     }
 }

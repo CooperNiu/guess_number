@@ -22,14 +22,10 @@ public class GameController {
         return map;
     }
 
-    @GetMapping("/score")
-    public Map<String, String> getScore(@RequestParam String guess) {
+    @GetMapping("/tryOnceScore")
+    public Map<String, String> getScore(@RequestParam String result) {
         int score = 0;
         Map<String, String> map = new HashMap<>();
-        RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
-        GuessNumberGame guessNumberGame = new GuessNumberGame(randomAnswerGenerator);
-        List<String> userAnswer = Arrays.asList(guess.split(" "));
-        String result = guessNumberGame.guess(userAnswer);
 //        System.out.print(guessNumberGame.getStatus());
         if (result.equals("4A0B")) {
             score += 3;
@@ -39,4 +35,29 @@ public class GameController {
         map.put("score", Integer.toString(score));
         return map;
     }
+
+    @GetMapping("/trySeveralTimesScore")
+    public Map<String, String> getSeveralTimesScore(@RequestParam String[] result) {
+        int score = 0;
+        int guessRight = 0;
+        Map<String, String> map = new HashMap<>();
+
+        for (int i = 0; i < result.length; i++) {
+            if (result[i].equals("4A0B") && (guessRight == 0 || guessRight == 1)) {
+                guessRight++;
+                score += 3;
+            } else if (result[i].equals("4A0B") && guessRight == 4) {
+                guessRight++;
+                score += 6;
+            } else if (result[i].equals("4A0B") && (guessRight == 5 || guessRight == 2)) {
+                guessRight++;
+                score += 5;
+            } else {
+                guessRight = 0;
+                score -= 3;
+            }
+        }
+        map.put("score",Integer.toString(score));
+        return map;
+}
 }
